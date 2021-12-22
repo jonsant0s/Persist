@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import axios from "axios";
+import React, { useState, useRef } from 'react';
+
+
 const Register = () => {
     const [user, setUser] = useState({
         name: "",

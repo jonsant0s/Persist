@@ -1,3 +1,4 @@
+/*
 const express = require("express");
 
 // recordRoutes is an instance of the express router.
@@ -82,3 +83,4 @@ recordRoutes.route("/:id").delete((req, response) => {
 });
 
 module.exports = recordRoutes;
+*/
