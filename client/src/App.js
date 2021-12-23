@@ -9,13 +9,14 @@ import Edit from "./components/edit";
 import Create from "./components/create";
 import RecordList from "./components/recordList";
 import SideBar from "./components/sidebar";
+import Register from "./components/auth/Register";
 
 const App = () => {
   return (
     <div>
       <Navbar/>
       <Routes>
-      
+        <Route path='/register' element={<Register/>}/>
         <Route path='/create' component={Create}/>
         <Route path='/edit' component={Edit}/>
         <Route path='/list' component={RecordList}/>

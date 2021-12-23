@@ -5,16 +5,19 @@ const mongoose = require("mongoose");
 
 const app = express();
 const cors = require("cors"); // installs a Node.js package that allows cross origin resource sharing
+
+const options = {
+    origin: cors.allowedOrigins,
+}
+
 require("dotenv").config({ path: "./config.env"}); // dotenv installs the module that loads environment variables from a .env file into process.env
 const Db = process.env.ATLAS_URI;
 const port = process.env.PORT || 5000; 
-
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
+
 app.use(bodyParser.json(), urlencodedParser);
-
-app.use(cors());
+app.use(cors(options));
 app.use(express.json());
-
 app.use(require("./routes/user"));
 //app.use(require("./routes/record"));
 
