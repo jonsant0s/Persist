@@ -7,9 +7,27 @@ export const register = (username, email, password) => {
         username,
         email,
         password,
+    });
+};
+
+export const login = (username, password) => {
+    return axios.post(API_URL + "login", {
+        username,
+        password,
     })
     .then((response) => {
-        console.log(response.data);
+        if (response.data.accessToken){
+            localStorage.setItem("user", JSON.stringify(response.data));
+        }
+
         return response.data;
     });
 };
+
+export const logout = () => {
+    localStorage.removeItem("user");
+};
+
+const getCurrentUser = () => {
+    return JSON.parse(localStorage.getItem("user"));
+}

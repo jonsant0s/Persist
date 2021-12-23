@@ -11,6 +11,8 @@ import './Auth.css';
 const Register = () => {
     const navigate = useNavigate();
 
+    const [validated, setValidated] = useState(false);
+    const [message, setMessage] = useState("");
     const [registerValues, setRegister] = useState({
         username: "",
         email: "",
@@ -26,17 +28,37 @@ const Register = () => {
     };
 
     const handleRegister = e => {
-        e.preventDefault();
+        const form = e.currentTarget;
 
-        console.log(registerValues);
+        setMessage("");
+        setValidated(false);
 
-        register(registerValues.username, registerValues.email, registerValues.password)
-        .then(() => {
-            navigate("/");
-            window.location.reload();
-        }).catch((err) => {
-            console.log(err);
-        });
+        if (form.checkValidity()) {
+            e.preventDefault();
+
+            
+            console.log(registerValues);
+
+            register(registerValues.username, registerValues.email, registerValues.password)
+            .then((response) => {
+                setMessage(response.data.message);
+                setValidated(true);
+                //navigate("/");
+                //window.location.reload();
+            }).catch((error) => {
+                const resMessage =
+                    (error.response &&
+                        error.response.data &&
+                        error.response.data.message) ||
+                    error.message ||
+                    error.toString();
+
+                setMessage(resMessage);
+                setValidated(false);
+            });
+        }
+        
+            
     }
 
     return(
@@ -45,6 +67,8 @@ const Register = () => {
                 <h2> Create Account </h2>
             </div>
             <Form
+                noValidate
+                validated={validated}
                 onSubmit={handleRegister}
                 className="form"
             >
@@ -59,7 +83,11 @@ const Register = () => {
                         id="username"
                         value={registerValues.username}
                         onChange={handleInputChange}
+                        required
                     />
+                    <Form.Control.Feedback type="invalid">
+                        Please enter username.
+                    </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group className="studentIDGroup">
                     <div>
@@ -72,7 +100,11 @@ const Register = () => {
                         id="email"
                         value={registerValues.email}
                         onChange={handleInputChange}
+                        required
                     />
+                    <Form.Control.Feedback type="invalid">
+                        Please enter email.
+                    </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group className="studentIDGroup">
                     <div>
@@ -85,7 +117,11 @@ const Register = () => {
                         id="password"
                         value={registerValues.password}
                         onChange={handleInputChange}
+                        required
                     />
+                    <Form.Control.Feedback type="invalid">
+                        Please enter password.
+                    </Form.Control.Feedback>
                 </Form.Group>
                 <Button
                     className="submitButton"
@@ -95,6 +131,17 @@ const Register = () => {
                 >
                     Sign Up
                 </Button>
+
+                {message && (
+                    <div className="form-group">
+                        <div
+                            className={ validated ? "alert alert-success" : "alert alert-danger" }
+                            role="alert"
+                        >
+                            {message}
+                        </div>
+                    </div>
+                )}
             </Form>
         </div>
     )

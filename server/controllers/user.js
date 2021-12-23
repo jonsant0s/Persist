@@ -21,11 +21,15 @@ exports.register = async (req,res) => {
         })
 
         dbUser.save((err) => {
-            res.status(500).send({ message: err });
-            return;
-        })
+            if(err){
+                res.status(500).send({ message: err });
+                return;
+            }
 
-        res.send({ message: "User was registered successfully" });
+            res.send({ message: "User was registered successfully" });
+        });
+
+        
     }
 }
 
