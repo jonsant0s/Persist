@@ -11,7 +11,7 @@ import './Auth.css';
 const Login = () => {
     const navigate = useNavigate();
 
-    const [successful, setSuccessful] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [validated, setValidated] = useState(false);
     const [message, setMessage] = useState("");
     const [loginValues, setLoginValues] = useState({
@@ -31,21 +31,18 @@ const Login = () => {
         const form = e.currentTarget;
 
         setMessage("");
-        setSuccessful(false);
+        setLoading(true);
 
         if (form.checkValidity()) {
             e.preventDefault();
 
-            
             console.log(loginValues);
 
             login(loginValues.username, loginValues.password)
-            .then((response) => {
-                setMessage(response.data.message);
-                setSuccessful(true);
-                //navigate("/");
-                //window.location.reload();
-            },
+            .then(() => {
+                navigate("/");
+                window.location.reload();
+            }).catch(
             (error) => {
                 const resMessage =
                     (error.response &&
@@ -55,12 +52,12 @@ const Login = () => {
                     error.toString();
 
                 setMessage(resMessage);
-                setSuccessful(false);
+                setLoading(false);
             });
         }
 
         setValidated(true);
-        console.log(successful);
+        console.log(loading);
         
             
     }
@@ -117,6 +114,9 @@ const Login = () => {
                 type="submit"
                 onClick={handleRegister}
             >
+            {loading && (
+                <span className="spinner-border spinner-border-sm"></span>
+            )}
                 Login
             </Button>
             <p className="accountParagraph"> Don't have an account? </p>
@@ -126,7 +126,7 @@ const Login = () => {
             {message && (
                 <Form.Group className="messageGroup" >
                     <div
-                        className={ successful ? "alert alert-success" : "alert alert-danger" }
+                        className={ loading ? "alert alert-success" : "alert alert-danger" }
                         role="alert"
                     >
                         {message}

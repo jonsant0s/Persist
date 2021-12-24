@@ -37,7 +37,7 @@ exports.register = async (req,res) => {
 exports.login = async (req, res) => {
 
     User.findOne({ username: req.body.username })
-    .then((err, user) => {
+    .exec((err, user) => {
         if (err) {
             res.status(500).send({ message: err });
             return;
