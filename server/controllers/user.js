@@ -10,7 +10,8 @@ exports.register = async (req,res) => {
     const takenEmail = await User.findOne({email: user.email});
 
     if (takenUsername || takenEmail) {
-        res.send({message: "Username or email has already been taken"});
+        res.status(401).send({message: "Username or email has already been taken"});
+        return;
     } else {
         user.password = await bcrypt.hash(req.body.password, 10);
 

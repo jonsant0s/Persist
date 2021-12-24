@@ -10,12 +10,14 @@ import Create from "./components/create";
 import RecordList from "./components/recordList";
 import SideBar from "./components/sidebar";
 import Register from "./components/auth/Register";
+import Login from "./components/auth/Login";
 
 const App = () => {
   return (
     <div>
       <Navbar/>
       <Routes>
+        <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/create' component={Create}/>
         <Route path='/edit' component={Edit}/>

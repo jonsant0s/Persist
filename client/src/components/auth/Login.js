@@ -1,31 +1,30 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 
-import { register } from './AuthHelpers';
+import Form from 'react-bootstrap/esm/Form';
+import Button from 'react-bootstrap/esm/Button';
 
-import Button from "react-bootstrap/esm/Button";
-import Form from "react-bootstrap/esm/Form";
+import { login } from './AuthHelpers';
 
 import './Auth.css';
 
-const Register = () => {
+const Login = () => {
     const navigate = useNavigate();
 
     const [successful, setSuccessful] = useState(false);
     const [validated, setValidated] = useState(false);
     const [message, setMessage] = useState("");
-    const [registerValues, setRegister] = useState({
+    const [loginValues, setLoginValues] = useState({
         username: "",
-        email: "",
         password: ""
     });
 
     const handleInputChange = e => {
         e.persist();
-        let prev = {...registerValues};
+        let prev = {...loginValues};
         prev[e.target.id] = e.target.value;
         
-        setRegister(prev);
+        setLoginValues(prev);
     };
 
     const handleRegister = e => {
@@ -38,9 +37,9 @@ const Register = () => {
             e.preventDefault();
 
             
-            console.log(registerValues);
+            console.log(loginValues);
 
-            register(registerValues.username, registerValues.email, registerValues.password)
+            login(loginValues.username, loginValues.password)
             .then((response) => {
                 setMessage(response.data.message);
                 setSuccessful(true);
@@ -66,10 +65,11 @@ const Register = () => {
             
     }
 
-    return(
+
+    return (
         <div className="containerDiv">
             <div className="titleDiv">
-                <h2> Create Account </h2>
+                <h2> Login </h2>
             </div>
             <Form
                 noValidate
@@ -86,29 +86,12 @@ const Register = () => {
                 <Form.Control
                     type="username"
                     id="username"
-                    value={registerValues.username}
+                    value={loginValues.username}
                     onChange={handleInputChange}
                     required
                 />
                 <Form.Control.Feedback type="invalid">
                     Please enter username.
-                </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group className="emailGroup">
-                <div>
-                    <Form.Label className="idLabel">
-                        Email
-                    </Form.Label>
-                </div>
-                <Form.Control
-                    type="email"
-                    id="email"
-                    value={registerValues.email}
-                    onChange={handleInputChange}
-                    required
-                />
-                <Form.Control.Feedback type="invalid">
-                    Please enter email.
                 </Form.Control.Feedback>
             </Form.Group>
             <Form.Group className="passwordGroup">
@@ -120,7 +103,7 @@ const Register = () => {
                 <Form.Control
                     type="password"
                     id="password"
-                    value={registerValues.password}
+                    value={loginValues.password}
                     onChange={handleInputChange}
                     required
                 />
@@ -134,9 +117,12 @@ const Register = () => {
                 type="submit"
                 onClick={handleRegister}
             >
-                Sign Up
+                Login
             </Button>
-
+            <p className="accountParagraph"> Don't have an account? </p>
+            <NavLink to="/register">
+                Sign Up Here
+            </NavLink>
             {message && (
                 <Form.Group className="messageGroup" >
                     <div
@@ -152,4 +138,4 @@ const Register = () => {
     )
 }
 
-export default Register;
+export default Login;

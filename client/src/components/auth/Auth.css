@@ -18,9 +18,9 @@
     justify-content: center;
 }
 
-.firstNameGroup,
-.lastNameGroup,
+.messageGroup,
 .usernameGroup,
+.emailGroup,
 .passwordGroup {
     margin-top: 10px;
     text-align: left;
@@ -28,6 +28,8 @@
 
 .submitButton {
     margin-top: 20px;
+    justify-content: center;
+    align-items: center;
 }
 
 .dropdownButton {
