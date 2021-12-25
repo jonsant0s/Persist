@@ -4,7 +4,7 @@ import { useNavigate, NavLink } from 'react-router-dom';
 import Form from 'react-bootstrap/esm/Form';
 import Button from 'react-bootstrap/esm/Button';
 
-import { login } from './AuthHelpers';
+import AuthHelpers from '../../services/AuthHelpers';
 
 import './Auth.css';
 
@@ -38,9 +38,9 @@ const Login = () => {
 
             console.log(loginValues);
 
-            login(loginValues.username, loginValues.password)
+            AuthHelpers.login(loginValues.username, loginValues.password)
             .then(() => {
-                navigate("/");
+                navigate("/home");
                 window.location.reload();
             }).catch(
             (error) => {
