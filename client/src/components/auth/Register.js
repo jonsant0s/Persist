@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { register } from './AuthHelpers';
+import AuthHelpers from '../../services/AuthHelpers';
 
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/esm/Form";
@@ -40,7 +40,7 @@ const Register = () => {
             
             console.log(registerValues);
 
-            register(registerValues.username, registerValues.email, registerValues.password)
+            AuthHelpers.register(registerValues.username, registerValues.email, registerValues.password)
             .then((response) => {
                 setMessage(response.data.message);
                 setSuccessful(true);
