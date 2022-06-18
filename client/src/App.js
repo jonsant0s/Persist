@@ -11,7 +11,7 @@ import CustomAlert from "./components/alert/CustomAlert";
 
 import HomeScreen from "./components/home/HomeScreen";
 import Edit from "./components/edit";
-import Create from "./components/create";
+import Create from "./components/record/Create";
 import RecordList from "./components/recordList";
 import SideBar from "./components/sidebar";
 import Register from "./components/auth/Register";
