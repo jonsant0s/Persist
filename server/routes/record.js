@@ -1,3 +1,13 @@
+const controller = require('../controllers/record');
+
+const express = require("express");
+
+const recordRoutes = express.Router();
+
+recordRoutes.route('/createRecord').post(controller.createRecord);
+
+module.exports = recordRoutes;
+
 /*
 const express = require("express");
 

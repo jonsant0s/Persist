@@ -21,7 +21,7 @@ app.use(bodyParser.json(), urlencodedParser);
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(require("./routes/user"));
-//app.use(require("./routes/record"));
+app.use(require("./routes/record"));
 
 mongoose.connect(Db, { useNewUrlParser:true, useUnifiedTopology:true})
 .then((res) => {

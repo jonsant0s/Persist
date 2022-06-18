@@ -1,3 +1,38 @@
+const Record = require("../models/record");
+
+exports.createRecord = async(req,res) => {
+    const record = req.body;
+
+    //validate
+    if(!record.title) {
+        res.status(400).send({
+            message: "Must include title."
+        });
+    }
+
+    //create record
+    const dbRecord = new Record({
+        id: record.id,
+        title: record.title,
+        status: record.status,
+        description: record.description,
+        priority: record.priority
+    })
+
+    dbRecord.save((err) => {
+        if (err){
+            res.status(500).send({ message: err });
+            return;
+        }
+
+        res.send({ message: "Record has been created." });
+    });
+}
+
+exports.listRecords = async(req,res) => {
+    
+}
+
 /*
 const express = require("express");
 
