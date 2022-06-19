@@ -41,6 +41,13 @@ export const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent"> 
+        <div className="navbar-nav mr-auto">
+          <li className="nav-item">
+              <NavLink to={"/records"} className="nav-link">
+                Tasks
+              </NavLink>
+          </li>
+        </div>
         {currentUser ? (
           <div className="navbar-nav ml-auto">
             <li className="nav-item">

@@ -11,7 +11,7 @@ import CustomAlert from "./components/alert/CustomAlert";
 
 import HomeScreen from "./components/home/HomeScreen";
 import Edit from "./components/edit";
-import Create from "./components/record/Create";
+import CreateRecord from "./components/record/CreateRecord";
 import RecordList from "./components/recordList";
 import SideBar from "./components/sidebar";
 import Register from "./components/auth/Register";
@@ -46,9 +46,9 @@ const App = () => {
             <HomeScreen/>
           </AuthRequired>
         }/>
-        <Route path='/create' component={<Create/>}/>
+        <Route path='/create' component={<CreateRecord/>}/>
         <Route path='/edit' component={Edit}/>
-        <Route path='/list' component={RecordList}/>
+        <Route path='/records' component={RecordList}/>
 
       </Routes>
       

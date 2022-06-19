@@ -6,7 +6,7 @@ import Modal from "react-bootstrap/esm/Modal";
 import Button from "react-bootstrap/esm/Button";
 import Alert from "react-bootstrap/esm/Alert";
 
-const Create = () => {
+const CreateRecord = () => {
     const navigate = useNavigate();
 
     const[loading, setLoading] = useState(false);
@@ -16,6 +16,12 @@ const Create = () => {
         title: "",
         
     })
+
+    return (
+        <>
+        Create Record Page
+        </>
+    )
 }
 
-export default Create;
+export default CreateRecord;
