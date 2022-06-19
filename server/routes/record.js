@@ -1,10 +1,13 @@
 const controller = require('../controllers/record');
 
 const express = require("express");
+const { get } = require('mongoose');
 
 const recordRoutes = express.Router();
 
 recordRoutes.route('/createRecord').post(controller.createRecord);
+recordRoutes.route('/').get(controller.findAll);
+recordRoutes.route('/:id').get(controller.findOne);
 
 module.exports = recordRoutes;
 

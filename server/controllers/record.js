@@ -1,6 +1,6 @@
 const Record = require("../models/record");
 
-exports.createRecord = async(req,res) => {
+exports.createRecord = async(req, res) => {
     const record = req.body;
 
     //validate
@@ -29,9 +29,40 @@ exports.createRecord = async(req,res) => {
     });
 }
 
-exports.listRecords = async(req,res) => {
+exports.findAll = async(req, res) => {
+    const title = req.query.title;
+    var condition;
+
+    if(title){
+        condition = { title: { $regex: new RegExp(title), $options: "i"}}
+    } else {
+        condition = {};
+    }
+
+    Record.find(condition)
+        .then(data => {
+            res.send(data);
+        }).catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occured while retrieving records."
+            });
+        });
+};
+
+exports.findOne = async(req, res) => {
+    const id = req.params.id;
     
-}
+    Record.findById(id)
+        .then(data => {
+            if (!data)
+                res.status(404).send({message: "Not found with id " + id});
+            else res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({ message: "Error retrieving record with id " + id});
+        });
+};
 
 /*
 const express = require("express");
