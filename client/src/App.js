@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 //import { Route } from "react-router-dom";
 import { Navigate, Routes, Route } from 'react-router-dom';
 // We import all the components we need in our app
-import { Navbar } from "./components/navigation/navbar";
+import { Navbar } from "./components/navigation/NavBar";
 import AuthRequired from "./services/AuthRequired";
 import AuthHelpers from "./services/AuthHelpers";
 import CustomAlert from "./components/alert/CustomAlert";
