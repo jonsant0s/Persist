@@ -47,6 +47,11 @@ export const Navbar = () => {
                 Tasks
               </NavLink>
           </li>
+          <li className="nav-item">
+              <NavLink to={"/create"} className="nav-link">
+                Create
+              </NavLink>
+          </li>
         </div>
         {currentUser ? (
           <div className="navbar-nav ml-auto">

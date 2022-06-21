@@ -46,9 +46,10 @@ const App = () => {
             <HomeScreen/>
           </AuthRequired>
         }/>
-        <Route path='/create' component={<CreateRecord/>}/>
-        <Route path='/edit' component={Edit}/>
-        <Route path='/records' component={RecordList}/>
+        
+          <Route path='/create' element={<CreateRecord/>}/>
+        
+        
 
       </Routes>
       
