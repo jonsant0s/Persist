@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
 
+
 import RecordService from "../../services/RecordService";
 
 const CreateRecord = () => {
@@ -24,7 +25,9 @@ const CreateRecord = () => {
     const saveRecord = () => {
         var data = {
             title: record.title,
-            description: record.description
+            status: record.status,
+            description: record.description,
+            priority: record.priority
         };
         console.log(data);
         RecordService.create(data)
@@ -32,14 +35,15 @@ const CreateRecord = () => {
                 setRecord({
                     id: response.data.id,
                     title: response.data.title,
+                    status: response.data.status,
                     description: response.data.description,
-
+                    priority: response.data.priority
                 });
                 setSubmitted(true);
                 console.log(response.data);
             })
             .catch(e => {
-                console.log(e);
+                console.log(e.response.data);
             });
     };
 
@@ -62,7 +66,7 @@ const CreateRecord = () => {
                 ):(
                     <div>
                         <div className="form-group">
-                            <label htmlFor="title">Title</label>
+                            <label htmlFor="title">Title:</label>
                             <input
                                 type="text"
                                 className="form-control"
@@ -73,8 +77,19 @@ const CreateRecord = () => {
                                 name="title"
                             />
                         </div>
+                        <div class="form-group">
+                            <label for="status">Status:</label>
+                            <select class="form-control" id="status" onChange={handleInputChange}>
+                                <option>Open</option>
+                                <option>Work In Progress</option>
+                                <option>Assigned</option>
+                                <option>Pending</option>
+                                <option>Resolved</option>
+                                <option>Cancelled</option>
+                            </select>
+                        </div>
                         <div className="form-group">
-                            <label htmlFor="description">Description</label>
+                            <label htmlFor="description">Description:</label>
                             <input
                                 type="text"
                                 className="form-control"
@@ -84,6 +99,14 @@ const CreateRecord = () => {
                                 onChange={handleInputChange}
                                 name="description"
                             />
+                        </div>
+                        <div class="form-group">
+                            <label for="priority">Priority:</label>
+                            <select class="form-control" id="priority" onChange={handleInputChange}>
+                                <option>Low</option>
+                                <option>Medium</option>
+                                <option>High</option>
+                            </select>
                         </div>
                         <button onClick={saveRecord} className="btn btn-success">
                             Submit
