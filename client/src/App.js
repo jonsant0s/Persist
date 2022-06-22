@@ -4,14 +4,14 @@ import React, { useState } from 'react';
 //import { Route } from "react-router-dom";
 import { Navigate, Routes, Route } from 'react-router-dom';
 // We import all the components we need in our app
-import { Navbar } from "./components/navigation/navbar";
+import { Navbar } from "./components/navigation/NavBar";
 import AuthRequired from "./services/AuthRequired";
 import AuthHelpers from "./services/AuthHelpers";
 import CustomAlert from "./components/alert/CustomAlert";
 
 import HomeScreen from "./components/home/HomeScreen";
 import Edit from "./components/edit";
-import Create from "./components/create";
+import CreateRecord from "./components/record/CreateRecord";
 import RecordList from "./components/recordList";
 import SideBar from "./components/sidebar";
 import Register from "./components/auth/Register";
@@ -46,9 +46,10 @@ const App = () => {
             <HomeScreen/>
           </AuthRequired>
         }/>
-        <Route path='/create' component={Create}/>
-        <Route path='/edit' component={Edit}/>
-        <Route path='/list' component={RecordList}/>
+        
+          <Route path='/create' element={<CreateRecord/>}/>
+        
+        
 
       </Routes>
       
