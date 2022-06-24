@@ -12,7 +12,7 @@ import CustomAlert from "./components/alert/CustomAlert";
 import HomeScreen from "./components/home/HomeScreen";
 import Edit from "./components/edit";
 import CreateRecord from "./components/record/CreateRecord";
-import RecordList from "./components/recordList";
+import RecordsList from "./components/record/RecordsList";
 import SideBar from "./components/sidebar";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
@@ -46,7 +46,7 @@ const App = () => {
             <HomeScreen/>
           </AuthRequired>
         }/>
-        
+          <Route path='/records' element={<RecordsList/>}/>
           <Route path='/create' element={<CreateRecord/>}/>
         
         
