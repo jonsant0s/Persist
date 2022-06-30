@@ -34,6 +34,10 @@ const RecordsList = () => {
         setCurrentRecord(null);
         setCurrentIndex(-1);
     };
+    const setActiveRecord = (record, index) => {
+        setCurrentRecord(record);
+        setCurrentIndex(index);
+    };
 
     const findByTitle = () => {
         RecordService.findByTitle(searchTitle)
@@ -66,6 +70,66 @@ const RecordsList = () => {
                         </button>
                     </div>
                 </div>
+            </div>
+            <div className="col-md-6">
+                <h4> Records List </h4>
+                <ul className="list-group">
+                    {records && 
+                        records.map((record,index) => (
+                        <li
+                            className={
+                                "list-group-item " + (index === currentIndex ? "active" : "")
+                            }
+                            onClick={() => setActiveRecord(record, index)}
+                            key={index}
+                        >
+                            {record.title}
+                        </li>
+                    ))}
+                </ul>
+                
+            </div>
+            <div className="col-md-6">
+                {currentRecord ? (
+                    <div>
+                        <h4>Record</h4>
+                        <div>
+                            <label>
+                                <strong>Title:</strong>
+                            </label>{" "}
+                            {currentRecord.title}
+                        </div>
+                        <div>
+                            <label>
+                                <strong>Status:</strong>
+                            </label>{" "}
+                            {currentRecord.status}
+                        </div>
+                        <div>
+                            <label>
+                                <strong>Description:</strong>
+                            </label>{" "}
+                            {currentRecord.description}
+                        </div>
+                        <div>
+                            <label>
+                                <strong>Priority:</strong>
+                            </label>{" "}
+                            {currentRecord.priority}
+                        </div>
+                        <Link
+                            to={"/records/" + currentRecord.id}
+                            className="badge badge-warning"
+                        >
+                            Edit
+                        </Link>
+                    </div>
+                ) : (
+                    <div>
+                        <br />
+                        <p>Please click on a Record....</p>
+                    </div>
+                )}
             </div>
         </div>
     );

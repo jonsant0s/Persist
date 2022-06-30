@@ -25,34 +25,35 @@ const App = () => {
 
 
   return (
-    <div className="App">
+    <div>
       <Navbar/>
-      {show && <CustomAlert setShow={setShow}/>}
-      <Routes>
-        <Route
-          path="/"
-          element={
-            user ? (
-              <Navigate replace to="/home" />
-            ) : (
-              <Navigate replace to="/login" />
-            )
-          }
-        />
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/register' element={<Register/>}/>
-        <Route path='/home' element={
-          <AuthRequired setShow={setShow}>
-            <HomeScreen/>
-          </AuthRequired>
-        }/>
-          <Route path='/records' element={<RecordsList/>}/>
-          <Route path='/create' element={<CreateRecord/>}/>
-        
-        
+      <div className="container mt-3">
+        {show && <CustomAlert setShow={setShow}/>}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              user ? (
+                <Navigate replace to="/home" />
+              ) : (
+                <Navigate replace to="/login" />
+              )
+            }
+          />
+          <Route path='/login' element={<Login/>}/>
+          <Route path='/register' element={<Register/>}/>
+          <Route path='/home' element={
+            <AuthRequired setShow={setShow}>
+              <HomeScreen/>
+            </AuthRequired>
+          }/>
+            <Route path='/records' element={<RecordsList/>}/>
+            <Route path='/create' element={<CreateRecord/>}/>
+          
+          
 
-      </Routes>
-      
+        </Routes>
+      </div>
       
     </div>
   );
